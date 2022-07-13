@@ -1,9 +1,15 @@
 package Lesson12;
 
+import java.time.LocalDate;
+
 public class Goods {
     int id;
     String name;
     int prise;
+
+    LocalDate date = LocalDate.now();
+
+
 
     Goods(int id, String name, int prise){
         this.id = id;
@@ -33,5 +39,13 @@ public class Goods {
 
     public void setPrise(int prise) {
         this.prise = prise;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

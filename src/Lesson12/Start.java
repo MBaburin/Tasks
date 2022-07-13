@@ -1,24 +1,66 @@
 package Lesson12;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 
 public class Start {
+    
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Shop shop = new Shop();
-        Goods iphone = new Goods(1,"Iphone",10000);
-        Goods samsung = new Goods(2,"Samsung",5000);
-        Goods huawei = new Goods(3,"Huawei",15000);
-        shop.add(iphone);
-        shop.add(samsung);
-        shop.add(huawei);
+        boolean work = true;
+        while (work) {
+            instructions();
+            int i = sc.nextInt();
+            if(i == 1) {
+                System.out.println("Добавление товара");
+                add(shop);
+            } else if(i == 2) {
+                System.out.println("Список товаров:");
+                show(shop);
+            } else if(i == 3) {
+                System.out.println("Введите id товара которого вы хотите удалить");
+                delete(shop);
+            } else if(i == 4) {
+                System.out.println("Выход");
+                sc.close();
+                work = false;}
+        }
+    }
 
-        for (Goods goods: shop.getGoodslist()){
-            System.out.print(goods.getName() + " ");
-            System.out.print(goods.getPrise() + "$");
+    public static void instructions(){
+        System.out.println(" ");
+        System.out.println("Нажмите 1 чтобы добавить товар");
+        System.out.println("Нажмите 2 чтобы просмотреть список товаров");
+        System.out.println("Нажмите 3 чтобы удалить товар");
+        System.out.println("Нажмите 4 чтобы выйти");
+    }
+    public static void add(Shop shop){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите id");
+        int id = sc.nextInt();
+        System.out.println("Введите имя");
+        String name = sc.next();
+        System.out.println("Введите цену");
+        int prise = sc.nextInt();
+        Goods good = new Goods(id, name, prise);
+        shop.add(good);
+    }
+
+    public static void show(Shop shop){
+        for (Goods goods : shop.getGoodslist()) {
+            System.out.print(goods.getId() + " Товар " +  goods.getName() + " " + " продаётся по цене " + goods.getPrise() + " $ " + "дата создания лота " + goods.getDate());
             System.out.println(" ");
         }
-
     }
+
+    public static void delete(Shop shop){
+        Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        shop.remove(i);
+    }
+
+  
+
+
 }
